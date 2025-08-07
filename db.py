@@ -12,8 +12,9 @@ import apsw.bestpractice
 apsw.bestpractice.apply(apsw.bestpractice.recommended)
 
 # Determine database path based on environment
-if os.environ.get("PLASH_PRODUCTION") == "1": db_path = Path("data/foward-x402-prod.db")
-else: db_path = Path("data/foward-x402.db")
+if not os.environ.get("RAILWAY_PROJECT_NAME"): db_path = Path("data/foward-x402.db")
+else: db_path = Path("/data/foward-x402.db")
+
 
 db_path.parent.mkdir(parents=True, exist_ok=True)    
 migrations_dir = "migrations"
